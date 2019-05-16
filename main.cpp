@@ -66,6 +66,10 @@ public:
 	int width(){
 		return __width;
 	}
+	
+	void update_region(int x,int y,int w,int h){
+		al_update_display_region(x,y,w,h);
+	}
 };
 
 
@@ -73,7 +77,7 @@ int main(void){
 	ios::sync_with_stdio(false);
 	cin.tie(0);
 	al_init();
-	Display disp(480,400,"meu teste");
+	Display disp(480,400);
 	
 	disp.show();
 	
@@ -81,6 +85,7 @@ int main(void){
 	
 	disp.title("novo nome");
 	disp.width(600);
+	disp.height(600);
 	disp.show();
 	
 	al_rest(1.0);
