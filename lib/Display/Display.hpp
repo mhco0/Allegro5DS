@@ -49,6 +49,8 @@ public:
 
 	~Display(){
 		al_destroy_display(__disp);
+		
+		if(has_text()) al_free(al_get_clipboard_text(__disp));
 	}	
 
 	void show(){
@@ -154,11 +156,18 @@ public:
 		al_apply_window_constraints(__disp,__constraint_mode);
 	}
 	
+	std::string clipboard(void){
+		return __cliptxt;
+	}
+	
 	void clipboard(std::string s){
 		__cliptxt = s;
 		if(!al_set_clipboard_text(__disp,__cliptxt.c_str()))
 			std::cerr << "error on setting clipboard text" << std::endl;
 	}
 	
+	bool has_text(void){
+		return al_clipboard_has_text(__disp);
+	}
 };
 

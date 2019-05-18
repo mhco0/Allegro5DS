@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 #include<Display.hpp>
 #include<Time.hpp>
+#include<Color.hpp>
 using namespace std;
 
 int main(void){
@@ -11,12 +12,15 @@ int main(void){
 	
 	Display disp(480,400,"Testes");
 	disp.clipboard("memes");
+	Color c(0,134,32,2);
 	Time t;
 	
 	disp.x(0);
 	disp.y(800);
 	
 	disp.show();
+	
+	c.rgba(0.1,0.3,0.2,0.1);
 	
 	t.rest(1.0);
 	
