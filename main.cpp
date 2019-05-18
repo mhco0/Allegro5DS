@@ -9,8 +9,12 @@ int main(void){
 	
 	al_init();
 	
-	Display disp(480,400,"Perazzo");
+	Display disp(480,400,"Testes");
+	disp.clipboard("memes");
 	Time t;
+	
+	disp.x(0);
+	disp.y(800);
 	
 	disp.show();
 	
@@ -19,7 +23,12 @@ int main(void){
 	disp.title("novo nome");
 	disp.width(600);
 	cout << disp.height() << endl;
+	disp.position(0,0);
+	disp.resize(500,500);
+	disp.constraints(20,20,100,100);
 	disp.show();
+	
+	cout << disp.x() << ' ' << disp.y() << endl;
 	
 	t.rest(1.0);
 	
