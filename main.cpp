@@ -1,7 +1,8 @@
-#include<bits/stdc++.h>
-#include<Display.hpp>
-#include<Time.hpp>
-#include<Color.hpp>
+#include <bits/stdc++.h>
+#include <Display.hpp>
+#include <Time.hpp>
+#include <Color.hpp>
+#include <Image.hpp>
 using namespace std;
 
 int main(void){

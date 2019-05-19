@@ -1,7 +1,7 @@
-#include<iostream>
-#include<string>
-#include<utility>
-#include<allegro5/allegro.h>
+#include <iostream>
+#include <string>
+#include <utility>
+#include <allegro5/allegro.h>
 
 class Display{
 private:
@@ -10,6 +10,26 @@ private:
 	int __height,__width,__x,__y;
 	int __maxw,__maxh,__minw,__minh;
 	bool __constraint_mode;
+	enum class Flags : int {
+		Windowed = ALLEGRO_WINDOWED,
+		Fullscreen_window = ALLEGRO_FULLSCREEN_WINDOW,
+		Fullscreen = ALLEGRO_FULLSCREEN,
+		Resizable = ALLEGRO_RESIZABLE,
+		Maximized = ALLEGRO_MAXIMIZED,
+		Opengl = ALLEGRO_OPENGL,
+		Opengl_3_0 = ALLEGRO_OPENGL_3_0,
+		Opengl_forward_compatible = ALLEGRO_OPENGL_FORWARD_COMPATIBLE,
+		#ifdef _WIN64
+		Direct3d = ALLEGRO_DIRECT3D,
+		Gtk_toplevel = ALLEGRO_GTK_TOPLEVEL,
+		#endif
+		Pipeline = ALLEGRO_PROGRAMMABLE_PIPELINE,
+		Frameless = ALLEGRO_FRAMELESS,
+		Noframe = ALLEGRO_NOFRAME,
+		Generate_expose_events = ALLEGRO_GENERATE_EXPOSE_EVENTS
+	};
+	
+	static Display::Flags __fl;
 public:
 	Display(int w,int h){
 		__disp = al_create_display(w,h);
@@ -27,6 +47,28 @@ public:
 		__minh = 0;
 		__constraint_mode = false;
 		__cliptxt = "";
+		__fl = static_cast<Display::Flags>(al_get_new_display_flags()); 
+	}
+	
+	Display(int w,int h, Display::Flags f){
+		al_set_new_display_flags(static_cast<int>(f));
+		
+		__disp = al_create_display(w,h);
+		if(__disp == nullptr) std::cerr << "error in create display" << std::endl;
+		
+		al_set_window_title(__disp,"AllegroDS");
+		al_get_window_position(__disp,&__x,&__y);
+		
+		__title = "AllegroDS";
+		__width = w;
+		__height = h;
+		__maxw = INT_MAX;
+		__maxh = INT_MAX;
+		__minw = 0;
+		__minh = 0;
+		__constraint_mode = false;
+		__cliptxt = "";
+		__fl = static_cast<Display::Flags>(al_get_new_display_flags());
 	}
 	
 	Display(int w,int h,const std::string name){
@@ -45,6 +87,28 @@ public:
 		__minh = 0;
 		__constraint_mode = false;
 		__cliptxt = "";
+		__fl = static_cast<Display::Flags>(al_get_new_display_flags());
+	}
+	
+	Display(int w,int h,const std::string name,Display::Flags f){
+		al_set_new_display_flags(static_cast<int>(f));
+	
+		__disp = al_create_display(w,h);
+		if(__disp == nullptr) std::cerr << "error in create display" << std::endl;
+		
+		al_set_window_title(__disp,name.c_str());
+		al_get_window_position(__disp,&__x,&__y);
+		
+		__title = name;
+		__width = w;
+		__height = h;
+		__maxw = INT_MAX;
+		__maxh = INT_MAX;
+		__minw = 0;
+		__minh = 0;
+		__constraint_mode = false;
+		__cliptxt = "";
+		__fl = static_cast<Display::Flags>(al_get_new_display_flags());
 	}
 
 	~Display(){
