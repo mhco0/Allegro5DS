@@ -10,6 +10,7 @@ private:
 	int __height,__width,__x,__y;
 	int __maxw,__maxh,__minw,__minh;
 	bool __constraint_mode;
+	
 	enum class Flags : int {
 		Windowed = ALLEGRO_WINDOWED,
 		Fullscreen_window = ALLEGRO_FULLSCREEN_WINDOW,
@@ -28,9 +29,12 @@ private:
 		Noframe = ALLEGRO_NOFRAME,
 		Generate_expose_events = ALLEGRO_GENERATE_EXPOSE_EVENTS
 	};
-	
-	static Display::Flags __fl;
+
+	static Display::Flags __dflgs;
+
 public:
+	
+
 	Display(int w,int h){
 		__disp = al_create_display(w,h);
 		if(__disp == nullptr) std::cerr << "error in create display" << std::endl;
@@ -47,7 +51,7 @@ public:
 		__minh = 0;
 		__constraint_mode = false;
 		__cliptxt = "";
-		__fl = static_cast<Display::Flags>(al_get_new_display_flags()); 
+		__dflgs = static_cast<Display::Flags>(al_get_new_display_flags()); 
 	}
 	
 	Display(int w,int h, Display::Flags f){
@@ -68,7 +72,7 @@ public:
 		__minh = 0;
 		__constraint_mode = false;
 		__cliptxt = "";
-		__fl = static_cast<Display::Flags>(al_get_new_display_flags());
+		__dflgs = static_cast<Display::Flags>(al_get_new_display_flags());
 	}
 	
 	Display(int w,int h,const std::string name){
@@ -87,7 +91,7 @@ public:
 		__minh = 0;
 		__constraint_mode = false;
 		__cliptxt = "";
-		__fl = static_cast<Display::Flags>(al_get_new_display_flags());
+		__dflgs = static_cast<Display::Flags>(al_get_new_display_flags());
 	}
 	
 	Display(int w,int h,const std::string name,Display::Flags f){
@@ -108,7 +112,7 @@ public:
 		__minh = 0;
 		__constraint_mode = false;
 		__cliptxt = "";
-		__fl = static_cast<Display::Flags>(al_get_new_display_flags());
+		__dflgs = static_cast<Display::Flags>(al_get_new_display_flags());
 	}
 
 	~Display(){
@@ -234,4 +238,6 @@ public:
 		return al_clipboard_has_text(__disp);
 	}
 };
+
+Display::Flags Display::__dflgs = static_cast<Display::Flags>(al_get_new_display_flags());
 
