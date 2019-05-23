@@ -4,13 +4,18 @@
 #include <allegro5/allegro.h>
 
 class Display{
+public: enum class Flags:int;
 private:
 	ALLEGRO_DISPLAY * __disp;
 	std::string __title,__cliptxt;
 	int __height,__width,__x,__y;
 	int __maxw,__maxh,__minw,__minh;
 	bool __constraint_mode;
-	
+
+	static Display::Flags __dflgs;
+
+public:
+
 	enum class Flags : int {
 		Windowed = ALLEGRO_WINDOWED,
 		Fullscreen_window = ALLEGRO_FULLSCREEN_WINDOW,
@@ -29,12 +34,7 @@ private:
 		Noframe = ALLEGRO_NOFRAME,
 		Generate_expose_events = ALLEGRO_GENERATE_EXPOSE_EVENTS
 	};
-
-	static Display::Flags __dflgs;
-
-public:
 	
-
 	Display(int w,int h){
 		__disp = al_create_display(w,h);
 		if(__disp == nullptr) std::cerr << "error in create display" << std::endl;
@@ -119,7 +119,15 @@ public:
 		al_destroy_display(__disp);
 		
 		if(has_text()) al_free(al_get_clipboard_text(__disp));
-	}	
+	}
+	
+	void flags(Display::Flags f){ 
+		
+	}
+	
+	Display::Flags flags(void){
+		return __dflgs;
+	}
 
 	void show(){
 		al_flip_display();
@@ -240,4 +248,9 @@ public:
 };
 
 Display::Flags Display::__dflgs = static_cast<Display::Flags>(al_get_new_display_flags());
+
+Display::Flags operator|(Display::Flags lhs,Display::Flags rhs){
+	return static_cast<Display::Flags>(static_cast<int>(lhs)|static_cast<int>(rhs));
+}
+
 
