@@ -7,6 +7,9 @@
 class Image{
 private:
 	ALLEGRO_BITMAP * __img;
+	
+public:
+
 	enum class Flags : int {
 		Memory = ALLEGRO_MEMORY_BITMAP,
 		Video = ALLEGRO_VIDEO_BITMAP,
@@ -18,7 +21,7 @@ private:
 		Mag_linear = ALLEGRO_MAG_LINEAR,
 		Mipmap = ALLEGRO_MIPMAP
 	};
-public:
+
 	Image(int w,int h){
 		__img = al_create_bitmap(w,h);
 		if(__img == nullptr)

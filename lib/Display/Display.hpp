@@ -253,4 +253,15 @@ Display::Flags operator|(Display::Flags lhs,Display::Flags rhs){
 	return static_cast<Display::Flags>(static_cast<int>(lhs)|static_cast<int>(rhs));
 }
 
+Display::Flags operator|(Display::Flags &lhs,Display::Flags &rhs){
+	return static_cast<Display::Flags>(static_cast<int>(lhs)|static_cast<int>(rhs));
+}
+
+Display::Flags operator|(Display::Flags &lhs,Display::Flags rhs){
+	return static_cast<Display::Flags>(static_cast<int>(lhs)|static_cast<int>(rhs));
+}
+
+Display::Flags operator|(Display::Flags lhs,Display::Flags &rhs){
+	return static_cast<Display::Flags>(static_cast<int>(lhs)|static_cast<int>(rhs));
+}
 

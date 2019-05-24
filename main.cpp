@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 #include <Display.hpp>
 #include <Time.hpp>
+#include <Timer.hpp>
 #include <Color.hpp>
 #include <Image.hpp>
 using namespace std;
@@ -11,7 +12,7 @@ int main(void){
 	
 	al_init();
 	
-	Display disp(480,400,"Testes");
+	Display disp(480,400);
 	disp.clipboard("memes");
 	Color c(0,134,32,2);
 	Time t;
