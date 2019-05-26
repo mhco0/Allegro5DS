@@ -16,9 +16,17 @@ int main(void){
 	disp.clipboard("memes");
 	Color c(0,134,32,2);
 	Time t;
+	Timer dt(2.0);
+	dt.start();
 	
 	disp.x(0);
 	disp.y(800);
+	
+	while(dt.count() <= dt.timer_speed()){
+		if(dt.started()) cout << dt.count() << endl;
+	}
+	
+	
 	
 	disp.show();
 	
